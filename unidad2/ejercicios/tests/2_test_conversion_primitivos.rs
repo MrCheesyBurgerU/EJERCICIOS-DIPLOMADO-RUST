@@ -46,8 +46,14 @@ mod conversion_tests {
         // En complemento a dos, 1110 1000 representa -24.
         let big_number_2: i32 = 1000;
         let big_number_2_i8: i8 = big_number_2 as i8;
-        assert_eq!(big_number_2_i8, -24)
+        assert_eq!(big_number_2_i8, -24);
 
+        // Ahora pasemos de un número negativo en i32 a un i8
+        // -280 en complemento a 2 es 11111111 11111111 11111110 11101000
+        // Al truncarlo a el primer byte se vuelve 11101000 que es -24
+        let negative: i32 = -280;
+        let negative_i8: i8 = negative as i8;
+        assert_eq!(negative_i8, -24);
     }
 
     #[test]
