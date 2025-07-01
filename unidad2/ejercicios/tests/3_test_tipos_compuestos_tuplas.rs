@@ -12,13 +12,14 @@ mod tipos_compuestos_tests {
         let persona: (String, u32, f32) = (String::from("Ana"), 28, 1.75);
 
         // 2. Accede al primer elemento (nombre) de la tupla usando la sintaxis de punto `.` y el índice.
+        let _nombre = persona.0;
 
-
-        // 3. Accede a la edad y verifica que sea 28.
-
+        let edad = persona.1;
+        assert_eq!(edad, 28);
 
         // 4. Accede a la altura y verifica que sea 1.75.
-
+        let altura = persona.2;
+        assert!((altura - 1.75).abs() < 0.0001);
     }
 
     #[test]
@@ -26,18 +27,21 @@ mod tipos_compuestos_tests {
         // Objetivo: Aprender a desestructurar una tupla para extraer sus valores en variables separadas.
 
         // 1. Define una tupla `punto` que represente coordenadas (x, y, z).
-
+        let punto: (i32, i32, i32) = (3, 7, 1);
 
         // 2. Desestructura la tupla `punto` en tres variables: `x`, `y`, y `z`.
         // Esta es una forma muy común y conveniente de trabajar con los valores de una tupla.
-
+        let (x, y, z) = punto;
 
         // 3. Verifica que los valores se hayan asignado correctamente.
-
+        assert_eq!(x, 3);
+        assert_eq!(y, 7);
+        assert_eq!(z, 1);
 
         // 4. A veces solo te interesan algunos valores. Usa `_` para ignorar los demás.
         // Desestructura la tupla `punto` para obtener solo el valor de `y`.
-
+        let (_, solo_y, _) = punto;
+        assert_eq!(solo_y, 7);
     }
 
     #[test]
