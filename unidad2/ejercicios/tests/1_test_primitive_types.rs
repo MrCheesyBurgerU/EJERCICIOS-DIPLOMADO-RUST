@@ -1,6 +1,5 @@
 #[cfg(test)]
 mod tests {
-    use std::{i8::MIN, result};
 
     #[test]
     fn test_booleans() {
