@@ -13,7 +13,16 @@ mod match_statement_tests {
         let resultado: &str;
 
         // 1. Usa `match` para comparar `numero` con diferentes valores.
+        resultado = match numero {
+                        1 => "Uno",
+                        2 => "Dos",
+                        3 => "Tres",
+                        4 | 5 => "Cuatro o Cinco", 
+                        _ => "Otro número",       
+                    };
 
+    // 2. Verifica que el resultado sea el esperado.
+    assert_eq!(resultado, "Tres");
     }
 
     #[test]
@@ -29,16 +38,23 @@ mod match_statement_tests {
         }
 
         // 1. Usa `match` para manejar el caso `Some`.
-
+        let resultado_algun_numero: String = match obtener_numero(true) {
+            Some(valor) => format!("El número es {}", valor),
+            None => "No hay número".to_string(),
+        };
+        assert_eq!(resultado_algun_numero, "El número es 42");
 
         // 2. Usa `match` para manejar el caso `None`.
-        
+        let resultado_sin_numero: String = match obtener_numero(false) {
+            Some(valor) => format!("El número es {}", valor),
+            None => "No hay número".to_string(),
+        };
+        assert_eq!(resultado_sin_numero, "No hay número");
     }
 
     #[test]
     fn test_match_con_multiples_patrones_y_rangos() {
         // Objetivo: Aprender a combinar patrones y usar rangos.
-
         let numero = 5;
 
         let descripcion = match numero {
