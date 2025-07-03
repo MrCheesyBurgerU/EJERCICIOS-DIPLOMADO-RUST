@@ -14,13 +14,16 @@ mod string_slice_tests {
         assert_eq!(mi_slice, "Hola, mundo!");
 
         // 2. `String` se puede crear a partir de un `&str` usando `.to_string()`.
-
+        let my_string: String = mi_slice.to_string();
+        assert_eq!(my_string, "Hola, mundo!");
 
         // 3. También se puede usar `String::from()`.
-
+        let my_string_2: String = String::from("Hola, mundo!");
+        assert_eq!(my_string_2, "Hola, mundo!");
 
         // 4. Un `&str` puede ser una vista de una parte de un `String`.
-
+        let subcadena: &str = &my_string_2[0..4]; // "Hola"
+        assert_eq!(subcadena, "Hola");
     }
 
     #[test]
@@ -28,13 +31,15 @@ mod string_slice_tests {
         // Objetivo: Aprender a modificar un `String` mutable.
 
         // 1. Para modificar un `String`, debe ser mutable (`mut`).
-
+        let mut saludo = String::from("Hola");
 
         // 2. Usa `push_str()` para añadir un slice de string (`&str`).
-
+        saludo.push_str(", mundo");
 
         // 3. Usa `push()` para añadir un solo carácter (`char`).
+        saludo.push('!');
 
+        assert_eq!(saludo, "Hola, mundo!");
     }
 
     #[test]
@@ -47,7 +52,8 @@ mod string_slice_tests {
         // El operador `+` toma posesión (ownership) del primer operando (`s1`).
         // `s1` es movido y ya no se puede usar después de esta línea.
         // El segundo operando (`s2`) es una referencia (`&String`), por lo que no se mueve.
-
+        let resultado = s1 + &s2; // `s1` es movido aquí y ya no se puede usar.
+        assert_eq!(resultado, "Hola, mundo!");
 
         // Descomenta la siguiente línea y verás un error de compilación porque `s1` fue movido.
         // println!("{}", s1);
@@ -63,13 +69,14 @@ mod string_slice_tests {
 
         // 1. Usa la macro `format!` para combinar `s1`, `s2` y `s3`.
         // `format!` no toma posesión de sus argumentos, por lo que `s1`, `s2` y `s3` siguen siendo válidos.
-
+        let resultado = format!("{}-{}-{}", s1, s2, s3);
 
         // 2. Verifica el resultado.
-
+        assert_eq!(resultado, "Tic-Tac-Toe");
 
         // 3. Verifica que `s1`, `s2` y `s3` todavía se pueden usar.
-
+        assert_eq!(s1, "Tic");
+        assert_eq!(s2, "Tac");
+        assert_eq!(s3, "Toe");
     }
-
 }
