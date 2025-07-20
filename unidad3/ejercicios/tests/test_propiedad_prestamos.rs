@@ -30,23 +30,23 @@ mod propiedad_tests {
     fn test_transferir_propiedad_en_function() {
         // Objetivo: Ver cómo la propiedad se transfiere a la funcion y se devuelve.
 
-        fn mi_funcion(tool: String) {
+        fn mi_funcion(tool: String) -> String {
             println!("La función 'take_and_return_tool' recibió: {}", tool);
             // 1. La función toma la propiedad de la 'tool'.
             // 2. Retorna la propiedad de la 'tool'.
-            
+            tool
         }
 
         let mut screwdriver = String::from("Destornillador Phillips");
 
         // 1. Pasa 'screwdriver' a la función.
         //    ¿Qué le sucede a 'screwdriver' después de esta llamada si no se reasigna?
-        mi_funcion(screwdriver); 
+        screwdriver = mi_funcion(screwdriver); 
 
         // 2. Asegúrate de que 'screwdriver' todavía pueda ser usado por el dueño original.
         // descomenta el las dos lienas siguientes de codigo para validar el punto 2.
-        //assert_eq!(screwdriver, "Destornillador Phillips");
-        //println!("El dueño original recuperó y está usando: {}", screwdriver);
+        assert_eq!(screwdriver, "Destornillador Phillips");
+        println!("El dueño original recuperó y está usando: {}", screwdriver);
     }
 
     #[test]
@@ -85,24 +85,24 @@ mod propiedad_tests {
         let mut wrench = String::from("Llave inglesa ajustable");
 
         // 1. Un mecánico necesita Usar la llave. Presta la llave de forma mutable.
-        let mechanic_mut_ref = &wrench; // <-- ompleta aqui
+        let mechanic_mut_ref = &mut wrench; // <-- ompleta aqui
 
         // 2. El mecánico ajusta la llave.
-        //mechanic_mut_ref.push_str(" (ajustada)"); // <-- remueve el comentario
+        mechanic_mut_ref.push_str(" (ajustada)"); // <-- remueve el comentario
 
         // 3. Intenta crear otra referencia mutable mientras la primera está activa (esto DEBERÍA fallar).
         //    Comenta la siguiente línea. ¿Por qué Rust prohíbe esto?
-            let another_mechanic_mut_ref = &mut wrench; // <--- Comentar esta linea.
-
+        let another_mechanic_mut_ref = &mut wrench; // <--- Comentar esta linea.
+        
         // 4. Intenta crear una referencia INMUTABLE mientras la mutable está activa (esto DEBERÍA fallar).
         //    Comenta la siguiente línea.
-            let inspector_ref = &wrench; // <--- Comentar esta línea.
+        let inspector_ref = &wrench; // <--- Comentar esta línea.
 
         // 5. Una vez que el préstamo mutable termina (al salir del scope de `mechanic_mut_ref`),
         //    el dueño original puede acceder y verificar el cambio.
         //    Nota: El préstamo termina cuando `mechanic_mut_ref` deja de ser usado,
         //    en este caso, después de la línea 2.
-        //assert_eq!(wrench, "Llave inglesa ajustable (ajustada)"); // <-- remueve el comentario de esla linea
+        assert_eq!(wrench, "Llave inglesa ajustable (ajustada)"); // <-- remueve el comentario de esla linea
         println!("La llave fue ajustada: {}", wrench);
     }
     #[test]
