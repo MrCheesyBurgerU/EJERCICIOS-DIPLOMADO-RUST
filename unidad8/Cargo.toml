@@ -1,9 +1,6 @@
 [package]
-name = "nucleo-banco"
+name = "unidad8"
 version = "0.1.0"
 edition = "2024"
-
-[features]
-auditoria = []
 
 [dependencies]
